@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate,useLocation } from "react-router-dom";
 
-const ListLayoutEdit = () => {
+const TreeLayoutEdit = () => {
 
   const location = useLocation();
   const { access_token, files, selectedId } = location.state || {};
@@ -76,4 +76,4 @@ const ListLayoutEdit = () => {
   );
 };
 
-export default ListLayoutEdit;
+export default TreeLayoutEdit;

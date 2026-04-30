@@ -27,7 +27,7 @@ function SharedSheet() {
       );
 
       const data = await res.json();
-      console.log(data);
+
 
       if (data.id) {
         alert("Sheet shared successfully ✅");

@@ -10,7 +10,7 @@ const [items, setItems] = useState([]);
 
 const getSheetData = async () => {
   const res = await fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1!A1:A100`,
+    `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1`,
     {
       method: "GET",
       headers: {
@@ -20,15 +20,8 @@ const getSheetData = async () => {
   );
 
   const data = await res.json();
-  console.log(data);
 
-  // Extract values safely
-  const values = data.values || [];
-
-  // Convert [["A"], ["B"]] → ["A", "B"]
-  const flat = values.map(row => row[0]);
-
-  setItems(flat);
+ setItems(data.values || []);
 };
 
 useEffect(() => {
@@ -37,41 +30,50 @@ useEffect(() => {
 
   return (
   <div className="list-container">
-  <h2 className="list-title">Shopping List</h2>
+  <h2 className="list-title">Table List</h2>
 
-  {items.map((item, index) => (
-    <div className="list-row" key={index}>
-      {files.appProperties.layout=="Check List" && (
-        <input type="checkbox" />
-        ) }
-      
-      <span className="list-line">{item}</span>
+  <table className="list-table" border="1" cellPadding="10">
+  <thead>
+    <tr>
+      {items[0]?.map((header, i) => (
+        <th key={i}>{header}</th>
+      ))}
+    </tr>
+  </thead>
 
-      <button
+  <tbody>
+    {items.slice(1).map((row, rowIndex) => (
+      <tr key={rowIndex}>
+        {items[0].map((_, colIndex) => (
+          <td key={colIndex}>{row[colIndex] || ""}</td>
+        ))}
+        <td><button
         className="list-update-btn"
         onClick={() =>
-          navigate("/ListLayoutEdit", {
+          navigate("/TableLayoutEdit", {
             state: {
               access_token,
               files,
-              selectedId: index + 1,
+              selectedId: rowIndex + 2,
             },
           })
         }
       >
         Update
-      </button>
-    </div>
-  ))}
+      </button></td>
+      </tr>
+    ))}
+  </tbody>
+</table>
 
   <button
     className="list-add-btn"
     onClick={() =>
-      navigate("/ListLayoutEdit", {
+      navigate("/TableLayoutEdit", {
         state: {
           access_token,
           files,
-          selectedId: "",
+          selectedId: "1",
         },
       })
     }

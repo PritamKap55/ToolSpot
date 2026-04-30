@@ -20,7 +20,7 @@ const getSheetData = async () => {
   );
 
   const data = await res.json();
-  console.log(data);
+
 
   // Extract values safely
   const values = data.values || [];

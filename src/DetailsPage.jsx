@@ -3,6 +3,8 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate,useLocation } from "react-router-dom";
 
 import ListLayout from "./ListLayout";
+import TableLayout from "./TableLayout";
+import TreeLayout from "./TreeLayout";
 //import "./styles.css";
 
 
@@ -12,7 +14,7 @@ function DetailsPage() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
-console.log(files);
+
   useEffect(() => {
   if (!access_token) {
      navigate("/")
@@ -79,10 +81,10 @@ const data = await res.json();
           <ListLayout />
       </div>
       <div style={{ display: files.appProperties.layout=="Tree" ? "block" : "none", width: 200, border: "1px solid black" }}>
-          <h2>{files.appProperties.layout}</h2>
+          <TreeLayout />
       </div>
       <div style={{ display: files.appProperties.layout=="Table" ? "block" : "none", width: 200, border: "1px solid black" }}>
-          <h2>{files.appProperties.layout}</h2>
+          <TableLayout />
       </div>
     </div>
   );
