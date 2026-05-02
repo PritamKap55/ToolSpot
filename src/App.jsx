@@ -8,6 +8,7 @@ import SharedSheet from "./SharedSheet";
 import Details from "./DetailsPage";
 import ListLayoutEdit from "./ListLayoutEdit";
 import TableLayoutEdit from "./TableLayoutEdit";
+import TreeLayoutEdit from "./TreeLayoutEdit";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Details" element={<Details />} />
         <Route path="/ListLayoutEdit" element={<ListLayoutEdit />} />
         <Route path="/TableLayoutEdit" element={<TableLayoutEdit />} />
+        <Route path="/TreeLayoutEdit" element={<TreeLayoutEdit />} />
       </Routes>
     </BrowserRouter>
   );

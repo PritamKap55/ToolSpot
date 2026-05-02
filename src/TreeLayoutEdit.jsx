@@ -7,25 +7,45 @@ const TreeLayoutEdit = () => {
   const location = useLocation();
   const { access_token, files, selectedId } = location.state || {};
   const navigate = useNavigate();
-  const [fildName, setFildName] = useState("");
+  const [selectedRow, setSelectedRow] = useState([]);
 
     useEffect(() => {
       
   if (!access_token) {
      alert("access_token Error")
     return;
+  }else {
+   GetValue();
   }
 
 }, [access_token]);
 
-
-  async function Submit() {
+async function GetValue() {
 
     if (selectedId !="")
     { 
 
+      const res = await fetch(
+        `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1!${selectedId}:${selectedId}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      );
+      const data = await res.json();
+      setSelectedRow(data.values[0]);
+      console.log(selectedRow)
+
+    } 
+      
+  }
+
+
+  async function Update() {
       await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1!A${selectedId}?valueInputOption=USER_ENTERED`,
+        `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1!B${selectedId}?valueInputOption=USER_ENTERED`,
         {
           method: "PUT",
           headers: {
@@ -37,10 +57,12 @@ const TreeLayoutEdit = () => {
           }),
         }
       );
-    } else {
+    }
+  
+  async function Add() {
 
     await fetch(
-          `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1!A1:append?valueInputOption=USER_ENTERED`,
+          `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1!B1:append?valueInputOption=USER_ENTERED`,
           {
             method: "POST",
             headers: {
@@ -48,14 +70,14 @@ const TreeLayoutEdit = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              values: [[fildName]]
+              values: [[20,fildName,5]]
             }),
           }
         );
     }
         
 
-  }
+  
 
 
   return (
@@ -65,12 +87,21 @@ const TreeLayoutEdit = () => {
       <input
         type="text"
        
-        value={fildName}
+        value=""
         onChange={(e) => setFildName(e.target.value)}
       />
-       <button onClick={() => Submit()}>
-        Submit
+
+       <input
+    type="checkbox"
+    //onClick={(e) => e.stopPropagation()} // prevent expand/collapse
+  />
+       <button onClick={() => Update()}>
+        Update
        </button>
+       <button onClick={() => Add()}>
+        Add
+       </button>
+      
       
     </div>
   );

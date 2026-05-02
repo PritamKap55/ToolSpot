@@ -5,7 +5,7 @@ const TreeView = ({ data }) => {
   return (
     <div>
       {data.map(node => (
-        <TreeNode key={node.id} node={node} disabled={true} />
+        <TreeNode key={node.id} node={node}  />
       ))}
     </div>
   );

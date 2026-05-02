@@ -74,16 +74,16 @@ const data = await res.json();
   });
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>{files.name}</h2>
-      <div style={{ display: files.appProperties.layout.includes("List")? "block" : "none",  border: "1px solid black" }}>
+    <div>
+      
+      <div style={{ display: files.appProperties.layout.includes("List")? "block" : "none" }}>
      
           <ListLayout />
       </div>
-      <div style={{ display: files.appProperties.layout=="Tree" ? "block" : "none", width: 200, border: "1px solid black" }}>
+      <div style={{ display: files.appProperties.layout=="Tree" ? "block" : "none" }}>
           <TreeLayout />
       </div>
-      <div style={{ display: files.appProperties.layout=="Table" ? "block" : "none", width: 200, border: "1px solid black" }}>
+      <div style={{ display: files.appProperties.layout=="Table" ? "block" : "none" }}>
           <TableLayout />
       </div>
     </div>

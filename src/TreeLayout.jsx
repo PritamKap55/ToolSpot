@@ -24,10 +24,11 @@ const getSheetData = async () => {
 
   const rows = data.values.slice(1);
 
-  const list = rows.map(r => ({
+  const list = rows.map((r,index) => ({
   id: Number(r[0]),
   name: r[1],
   parent: Number(r[2]),
+  rowNumber: index + 2
 }));
 
 const buildTree = (list) => {
@@ -54,9 +55,12 @@ const formattedTree = treeData.map(node => ({
   label: node.name,
   value: node.id,
   children: node.children,
+  rowNumber: node.rowNumber,
 }));
 
 setTreeData(formattedTree);
+
+console.log(formattedTree)
 
 };
 
@@ -68,7 +72,7 @@ useEffect(() => {
   <div className="list-container">
   <h2 className="list-title">Shopping List</h2>
 
-  <TreeView data={treeData} />
+  <TreeView  data={treeData} />
  
   <button
     className="list-add-btn"

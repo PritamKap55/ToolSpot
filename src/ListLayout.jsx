@@ -37,7 +37,7 @@ useEffect(() => {
 
   return (
   <div className="list-container">
-  <h2 className="list-title">Shopping List</h2>
+  <h2 className="list-title">{files.name}</h2>
 
   {items.map((item, index) => (
     <div className="list-row" key={index}>
@@ -46,7 +46,7 @@ useEffect(() => {
         ) }
       
       <span className="list-line">{item}</span>
-
+<div style={{ float: "right" }}>
       <button
         className="list-update-btn"
         onClick={() =>
@@ -59,8 +59,23 @@ useEffect(() => {
           })
         }
       >
-        Update
+        ✏️
       </button>
+      <button
+        className="list-update-btn"
+        onClick={() =>
+          navigate("/ListLayoutEdit", {
+            state: {
+              access_token,
+              files,
+              selectedId: index + 1,
+            },
+          })
+        }
+      >
+        ❌
+      </button>
+       </div>
     </div>
   ))}
 

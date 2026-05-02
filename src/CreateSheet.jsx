@@ -1,6 +1,6 @@
 import { useGoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
-import TreeView from "./TreeView";
+import TV from "./TV";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import jsPDF from "jspdf";
@@ -187,7 +187,7 @@ const downloadCSV = () => {
   className={layoutOptions[2] === layout ? "active" : ""}
   >
       
-        <TreeView data={treeData}  disabled />
+        <TV data={treeData}  disabled />
      
       </li>
       <li onClick={() => setLayout(layoutOptions[3])} style={{ border: "1px solid #ccc" }}

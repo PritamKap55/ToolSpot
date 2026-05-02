@@ -61,7 +61,7 @@ function AccountsPage() {
       ) : (
         <div>
           <h3>Welcome {user.name}</h3>
-          <h4>Email: {user.email}</h4>
+         
 
            <button className="leaf-btn" onClick={() => navigate("/create",{state: {access_token:access_token}})}>
             Create New Account
@@ -70,7 +70,7 @@ function AccountsPage() {
           <ul className="fileList">
             {files.map((file,index) => (
               <li key={file.id} 
-                  className={`fileItem`}
+                  className={`fileItem ${selectedFile?.id === file.id ? "active" : ""}`}
                   onClick={() => setSelectedFile(file)} >
                 <span className="fileNumber">
                   {String(index + 1).padStart(2, "0")}
