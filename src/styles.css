@@ -137,6 +137,7 @@ ul {
   border: 5px solid #f4b400;
   
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: scroll;
 }
 
 .list-title {
@@ -213,4 +214,15 @@ th {
   text-align: left;
   background-color: #04AA6D;
   color: white;
+}
+
+.tableContainer {
+ width: 100%;
+  height: 100%;
+  overflow: auto;
+
+  display: contents;
+  justify-content: center;
+  align-items: flex-start; /* 👈 important (top align for scroll) */
+  padding: 20px;
 }

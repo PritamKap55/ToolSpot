@@ -31,7 +31,7 @@ useEffect(() => {
   return (
   <div className="list-container">
   <h2 className="list-title">Table List</h2>
-
+<div class="tableContainer">
   <table className="list-table" border="1" cellPadding="10">
   <thead>
     <tr>
@@ -47,7 +47,8 @@ useEffect(() => {
         {items[0].map((_, colIndex) => (
           <td key={colIndex}>{row[colIndex] || ""}</td>
         ))}
-        <td><button
+        <td>
+          <button
         className="list-update-btn"
         onClick={() =>
           navigate("/TableLayoutEdit", {
@@ -59,13 +60,31 @@ useEffect(() => {
           })
         }
       >
-        Update
-      </button></td>
+        ✏️
+      </button>
+
+      <button
+        className="list-update-btn"
+        onClick={() =>
+          navigate("/TableLayoutEdit", {
+            state: {
+              access_token,
+              files,
+              selectedId: rowIndex + 2,
+            },
+          })
+        }
+      >
+        ❌
+      </button>
+      
+      
+      </td>
       </tr>
     ))}
   </tbody>
 </table>
-
+</div>
   <button
     className="list-add-btn"
     onClick={() =>

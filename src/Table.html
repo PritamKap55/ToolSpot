@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixed Table Header</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(to right,#2cc56f,#35b8d7);
+    padding:40px;
+    color:white;
+}
+
+.container{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+}
+
+.title{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:20px;
+    font-weight:300;
+}
+
+.table-container{
+    max-height:350px;
+    overflow-y:auto;
+    border-radius:4px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:rgba(255,255,255,0.05);
+}
+
+thead{
+    background:rgba(255,255,255,0.25);
+    position:sticky;
+    top:0;
+}
+
+th, td{
+    padding:18px 16px;
+    text-align:left;
+    border-bottom:1px solid rgba(255,255,255,0.15);
+}
+
+th{
+    font-size:14px;
+}
+
+td{
+    font-size:15px;
+}
+
+tbody tr:hover{
+    background:rgba(255,255,255,0.08);
+}
+
+.footer{
+    text-align:center;
+    margin-top:60px;
+    font-size:13px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="title">FIXED TABLE HEADER</div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>CODE</th>
+                    <th>COMPANY</th>
+                    <th>PRICE</th>
+                    <th>CHANGE</th>
+                    <th>CHANGE %</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>AAC</td>
+                    <td>AUSTRALIAN COMPANY</td>
+                    <td>$1.38</td>
+                    <td>+2.01</td>
+                    <td>-0.36%</td>
+                </tr>
+
+                <tr>
+                    <td>AAD</td>
+                    <td>AUSENCO</td>
+                    <td>$2.38</td>
+                    <td>-0.01</td>
+                    <td>-1.36%</td>
+                </tr>
+
+                <tr>
+                    <td>AAX</td>
+                    <td>ADELAIDE</td>
+                    <td>$3.22</td>
+                    <td>+0.01</td>
+                    <td>+1.36%</td>
+                </tr>
+
+                <tr>
+                    <td>XXD</td>
+                    <td>ADITYA BIRLA</td>
+                    <td>$1.02</td>
+                    <td>-1.01</td>
+                    <td>+2.36%</td>
+                </tr>
+
+                <tr>
+                    <td>AAC</td>
+                    <td>AUSTRALIAN COMPANY</td>
+                    <td>$1.38</td>
+                    <td>+2.01</td>
+                    <td>-0.36%</td>
+                </tr>
+
+                <tr>
+                    <td>AAD</td>
+                    <td>AUSENCO</td>
+                    <td>$2.38</td>
+                    <td>-0.01</td>
+                    <td>-1.36%</td>
+                </tr>
+
+                <tr>
+                    <td>AAX</td>
+                    <td>ADELAIDE</td>
+                    <td>$3.22</td>
+                    <td>+0.01</td>
+                    <td>+1.36%</td>
+                </tr>
+
+                <tr>
+                    <td>XXD</td>
+                    <td>ADITYA BIRLA</td>
+                    <td>$1.02</td>
+                    <td>-1.01</td>
+                    <td>+2.36%</td>
+                </tr>
+
+                <tr>
+                    <td>AAC</td>
+                    <td>AUSTRALIAN COMPANY</td>
+                    <td>$1.38</td>
+                    <td>+2.01</td>
+                    <td>-0.36%</td>
+                </tr>
+
+                <tr>
+                    <td>AAD</td>
+                    <td>AUSENCO</td>
+                    <td>$2.38</td>
+                    <td>-0.01</td>
+                    <td>-1.36%</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="footer">
+        Made with ❤️ by Nikhil Krishnan
+    </div>
+
+</div>
+
+</body>
+</html>
