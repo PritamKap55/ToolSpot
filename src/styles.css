@@ -190,39 +190,257 @@ ul {
   font-weight: bold;
 }
 
-/* List */
 
 
-table {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+
+    /* List */
+
+ .centerDiv
+ {
+  text-align: -webkit-center
+ }
+ .todo-paper{
+        width:380px;
+        background:#fff;
+        box-shadow:0 4px 10px rgba(0,0,0,0.25);
+        padding-bottom:30px;
+        text-align: left;
+    }
+
+  .todo-header{
+        background:#ece4b7;
+        text-align:center;
+        padding:25px 0;
+    }
+
+    .todo-header h2{
+        margin:0;
+        font-size:58px;
+        font-family:cursive;
+        font-weight:normal;
+        color:#000;
+    }
+
+    .todo-body{
+        padding:20px 35px;
+    }
+
+    .todo-line{
+        display:flex;
+        align-items:center;
+        height:34px;
+        border-bottom:1px solid #bdbdbd;
+    }
+
+    .check-box{
+        width:18px;
+        height:18px;
+        background-color:#f6efc6;
+        margin-right:12px;
+        flex-shrink:0;
+
+    }
+
+    .line-space{
+        flex:1;
+    }
+
+.input-box {
+  border: none;
+  outline: none;
+  color: #6b6375;
+  font-family: 25px;
+  background-color: #fff;
 }
 
-td, th {
-  border: 1px solid #ddd;
-  padding: 8px;
+.input-box:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
-tr:nth-child(even){background-color: #f2f2f2;}
 
-tr:hover {background-color: #ddd;}
+/* table */
 
-th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
+.table-body{
+    min-height:100vh;
+    background:linear-gradient(to right,#2cc56f,#35b8d7);
+    
+    color:white;
 }
 
-.tableContainer {
- width: 100%;
-  height: 100%;
-  overflow: auto;
-
-  display: contents;
-  justify-content: center;
-  align-items: flex-start; /* 👈 important (top align for scroll) */
-  padding: 20px;
+.table-title{
+    text-align:center;
+    font-size:42px;
+    margin-bottom:20px;
+    font-weight:300;
 }
+.table-container{
+    max-height:350px;
+    overflow-y:auto;
+    border-radius:4px;
+}
+
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:rgba(255,255,255,0.05);
+}
+
+thead{
+    background:rgba(255,255,255,0.25);
+    position:sticky;
+    top:0;
+}
+
+th, td{
+    padding:8px 6px;
+ 
+    border-bottom:1px solid rgba(255,255,255,0.15);
+}
+
+th{
+    font-size:14px;
+     white-space: nowrap;
+}
+
+td{
+      font-size:15px;
+    max-width: 100ch;   /* roughly 100 characters */
+    white-space: normal;
+    word-wrap: break-word;
+     white-space: nowrap;
+     
+}
+
+tbody tr:hover{
+    background:rgba(255,255,255,0.08);
+}
+
+.footer{
+    text-align:center;
+    margin-top:60px;
+    font-size:13px;
+}
+
+
+/* Tree */
+
+   :root {
+    --dbt-teal: #008ba3;
+    --dbt-bg: #f4f6f8;
+    --line: #cbd5e0;
+  }
+
+
+
+  .tree ul {
+    padding-top: 20px;
+    position: relative;
+  }
+
+  .tree li {
+    list-style-type: none;
+    position: relative;
+    padding: 20px 0 0 40px;
+  }
+
+  /* Vertical line */
+  .tree li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 12px;
+    border-left: 2px solid var(--line);
+    height: 100%;
+  }
+
+  /* Horizontal line */
+  .tree li::after {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 12px;
+    width: 20px;
+    border-top: 2px solid var(--line);
+  }
+
+  /* Remove extra line from last child */
+  .tree li:last-child::before {
+    height: 32px;
+  }
+
+  /* Node row */
+  .node-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Expand button */
+  .toggle {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: none;
+    background: var(--dbt-teal);
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+  }
+
+  /* Card */
+  .node-card {
+    width: 220px;
+    background: white;
+    border: 2px solid var(--dbt-teal);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .node-header {
+    background-color: var(--dbt-teal);
+    color: white;
+    padding: 6px 12px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+  }
+
+  .dot {
+    background: #ff694b;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin-right: 6px;
+  }
+
+  .node-body {
+    padding: 14px;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .source {
+    border-color: #94a3b8;
+  }
+
+  .children {
+    display: none;
+  }
+
+  .children.show {
+    display: block;
+  }
+
+  .node-card:hover {
+    transform: translateY(-2px);
+    transition: .2s ease;
+  }

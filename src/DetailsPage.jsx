@@ -74,7 +74,7 @@ const data = await res.json();
   });
 
   return (
-    <div>
+    <div className="centerDiv">
       
       <div style={{ display: files.appProperties.layout.includes("List")? "block" : "none" }}>
      

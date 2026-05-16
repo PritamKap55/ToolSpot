@@ -62,12 +62,7 @@ const ListLayoutEdit = () => {
     <div>
       <h3>Edit</h3>
 
-      <input
-        type="text"
-       
-        value={fildName}
-        onChange={(e) => setFildName(e.target.value)}
-      />
+      <input type="text" value={fildName} onChange={(e) => setFildName(e.target.value)}/>
        <button onClick={() => Submit()}>
         Submit
        </button>
