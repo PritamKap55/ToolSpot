@@ -25,12 +25,18 @@ const ListLayout = () => {
 
     if (updated.length < 10) {
       while (updated.length < 11) {
-        updated.push("New Record");
+        updated.push("");
       }
     } else {
-      updated.push("New Record");
+      updated.push("");
     }
 
+    setItems(updated);
+  };
+
+  const handleChange = (index, value) => {
+    const updated = [...items];
+    updated[index] = value;
     setItems(updated);
   };
 
@@ -54,7 +60,9 @@ const ListLayout = () => {
               <input className="check-box" type="checkbox" />
             )}
 
-            <input className="line-space input-box" type="text" />
+            <input className="line-space input-box" type="text" value={item}
+              onChange={(e) => handleChange(index, e.target.value)}
+            />
 
             <div>
               📌

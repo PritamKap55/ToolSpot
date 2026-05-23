@@ -1,20 +1,17 @@
-/* create */
 
-.create{
-  padding: 2px;
-}
-
-.create li{
-  width: 46vw;
-              
-}
 
 
 .container {
   display: flex;
   justify-content: center; /* vertical center */
   align-items: center;     /* horizontal center */
-
+  padding: 20;
+  margin-left: auto;
+  margin-right: auto;
+}
+.innrContainer
+{
+  max-width: 500px;
 }
 
 .button {
@@ -39,6 +36,20 @@
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.5px;
+}
+
+.innrDiv
+{
+  width: 45%;
+  border: 1px solid #ccc;
+  margin: auto;
+}
+
+.innrDivActive {
+   width: 45%;
+   border: 3px solid #40924f; /* darker shade */
+   background-color: black;
+   margin: auto;
 }
 
 .fileList {
@@ -74,10 +85,7 @@
   background-color: rgba(44, 62, 80, 0.7);
 }
 
-.fileItem.active {
-   border: 3px solid #40924f; /* darker shade */
-   background-color: black;
-}
+
 
 ul {
   list-style: none;
@@ -127,7 +135,12 @@ ul {
   100% { background-position: 0% 50%; }
 }
 
+
+
 /* List */
+h3,h4{
+  margin: 5px;
+}
 
 .list-container {
   

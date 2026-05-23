@@ -13,7 +13,7 @@ function CreateSheet() {
 
   const [layout, setLayout] = useState("");
   const [fileName, setFileName] = useState("");
-  const layoutOptions = ["List","Check List", "Tree", "Table"];
+  const layoutOptions = ["List", "Check List", "Tree", "Table"];
   const items = ["Coffee", "Tea", "Coca Cola"];
 
   const treeData = [
@@ -43,7 +43,8 @@ function CreateSheet() {
   ];
 
   const data = [
-    { id: 1, name: "John", age: 25 },
+    { id: 1, name: "Pritam", age: 25 },
+    { id: 2, name: "Vshal", age: 28 },
     { id: 2, name: "Jane", age: 28 }
   ];
 
@@ -99,136 +100,135 @@ function CreateSheet() {
   }
 
   const downloadPDF = () => {
-  const doc = new jsPDF();
+    const doc = new jsPDF();
 
-  doc.text("Items:", 10, 10);
+    doc.text("Items:", 10, 10);
 
-  items.forEach((item, index) => {
-    doc.text(`• ${item}`, 10, 20 + index * 10);
-  });
+    items.forEach((item, index) => {
+      doc.text(`• ${item}`, 10, 20 + index * 10);
+    });
 
-  doc.save("list.pdf");
-};
+    doc.save("list.pdf");
+  };
 
-const downloadCSV = () => {
-  // Add header
-  const header = ["No,Item"];
+  const downloadCSV = () => {
+    // Add header
+    const header = ["No,Item"];
 
-  // Convert data
-  const rows = items.map((item, index) => `${index + 1},${item}`);
+    // Convert data
+    const rows = items.map((item, index) => `${index + 1},${item}`);
 
-  const csvContent = [header, ...rows].join("\n");
+    const csvContent = [header, ...rows].join("\n");
 
-  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
 
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "items.csv";
-  link.click();
-};
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "items.csv";
+    link.click();
+  };
 
   return (
 
-    <div className="create">
-      <h3>Select Option</h3>
-      <p>Selected: {layout}</p>
+    <div className="container">
+      <div className="innrContainer">
+        <h3>Select Option</h3>
+        <p> {layout}</p>
+        
+        <ul className="fileList">
+          <li  onClick={() => setLayout(layoutOptions[0])}
+            className={layoutOptions[0] === layout ? "innrDivActive" : "innrDiv"}
+          >
 
-<ul  className="fileList">
-  <li  className="fileList" onClick={() => setLayout(layoutOptions[0])}
-    style={{ border: "1px solid #ccc" }}
-    className={layoutOptions[0] === layout ? "active" : ""}
-    >
+            {open && (
 
-        {open && (
-          
-          <ul>
-            {items.map((item, index) => (
-              <li
-                key={index}
-                style={{
-                  padding: "5px",
-                  cursor: "pointer",
-                }}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        )}
-      
-</li>
-<li  className="fileList" onClick={() => setLayout(layoutOptions[1])}
-  style={{ border: "1px solid #ccc" }}
-  className={layoutOptions[1] === layout ? "active" : ""}
-  >
-
-        {open && (
-          
-          <ul>
-            {items.map((item, index) => (
-              <li
-                key={index}
-                style={{
-                  padding: "5px",
-                  cursor: "pointer",
-                }}
-              >
-                <input type="checkbox" disabled  />
-                {item}
-              </li>
-            ))}
-          </ul>
-        )}
-      
-</li>
-
- <li  className="fileList" onClick={() => setLayout(layoutOptions[2])}
-  style={{ border: "1px solid #ccc" }}
-  className={layoutOptions[2] === layout ? "active" : ""}
-  >
-      
-        <TV data={treeData}  disabled />
-     
-      </li>
-      <li onClick={() => setLayout(layoutOptions[3])} style={{ border: "1px solid #ccc" }}
-        className={layoutOptions[3] === layout ? "active" : ""}
-        >
-      
-        <table border="1">
-          <thead>
-            <tr>
-              {columns.map((col) => (
-                <th key={col}>{col.toUpperCase()}</th>
-              ))}
-            </tr>
-          </thead>
-
-          <tbody>
-            {data.map((row, i) => (
-              <tr key={i}>
-                {columns.map((col) => (
-                  <td key={col}>{row[col]}</td>
+              <ul>
+                {items.map((item, index) => (
+                  <li
+                    key={index}
+                    style={{
+                      padding: "5px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {item}
+                  </li>
                 ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      
-      </li>
-      </ul>
-      <input
-        type="text"
-        placeholder="Enter file name"
-        value={fileName}
-        onChange={(e) => setFileName(e.target.value)}
-      />
+              </ul>
+            )}
 
-      <button onClick={() => getOrCreateFile()}>
-        Create Sheet
-      </button>
+          </li>
+          <li className="fileList" onClick={() => setLayout(layoutOptions[1])}
+            className={layoutOptions[1] === layout ? "innrDivActive" : "innrDiv"}
+          >
 
-      <button onClick={downloadPDF}>Download PDF</button>
-      <button onClick={downloadCSV}>Download CSV</button>
+            {open && (
+
+              <ul>
+                {items.map((item, index) => (
+                  <li
+                    key={index}
+                    style={{
+                      padding: "5px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <input type="checkbox" disabled />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
+
+          </li>
+
+          <li className="fileList" onClick={() => setLayout(layoutOptions[2])}
+            className={layoutOptions[2] === layout ? "innrDivActive" : "innrDiv"}
+          >
+
+            <TV data={treeData} disabled />
+
+          </li>
+          <li onClick={() => setLayout(layoutOptions[3])} 
+            className={layoutOptions[3] === layout ? "innrDivActive" : "innrDiv"}
+          >
+
+            <table border="1">
+              <thead>
+                <tr>
+                  {columns.map((col) => (
+                    <th key={col}>{col.toUpperCase()}</th>
+                  ))}
+                </tr>
+              </thead>
+
+              <tbody>
+                {data.map((row, i) => (
+                  <tr key={i}>
+                    {columns.map((col) => (
+                      <td style={{padding:"4px"}} key={col}>{row[col]}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+          </li>
+        </ul>
+        <input
+          type="text"
+          placeholder="Enter file name"
+          value={fileName}
+          onChange={(e) => setFileName(e.target.value)}
+        />
+
+        <button onClick={() => getOrCreateFile()}>
+          Create Sheet
+        </button>
+
+        <button onClick={downloadPDF}>Download PDF</button>
+        <button onClick={downloadCSV}>Download CSV</button>
+      </div>
     </div>
   );
 }
