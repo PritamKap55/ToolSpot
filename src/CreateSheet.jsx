@@ -134,9 +134,9 @@ function CreateSheet() {
       <div className="innrContainer">
         <h3>Select Option</h3>
         <p> {layout}</p>
-        
+
         <ul className="fileList">
-          <li  onClick={() => setLayout(layoutOptions[0])}
+          <li onClick={() => setLayout(layoutOptions[0])}
             className={layoutOptions[0] === layout ? "innrDivActive" : "innrDiv"}
           >
 
@@ -189,7 +189,7 @@ function CreateSheet() {
             <TV data={treeData} disabled />
 
           </li>
-          <li onClick={() => setLayout(layoutOptions[3])} 
+          <li onClick={() => setLayout(layoutOptions[3])}
             className={layoutOptions[3] === layout ? "innrDivActive" : "innrDiv"}
           >
 
@@ -206,7 +206,7 @@ function CreateSheet() {
                 {data.map((row, i) => (
                   <tr key={i}>
                     {columns.map((col) => (
-                      <td style={{padding:"4px"}} key={col}>{row[col]}</td>
+                      <td style={{ padding: "4px" }} key={col}>{row[col]}</td>
                     ))}
                   </tr>
                 ))}
@@ -215,19 +215,24 @@ function CreateSheet() {
 
           </li>
         </ul>
-        <input
-          type="text"
-          placeholder="Enter file name"
-          value={fileName}
-          onChange={(e) => setFileName(e.target.value)}
-        />
 
-        <button onClick={() => getOrCreateFile()}>
+
+        <div className="inputBox">
+          <label>Name</label>
+          <input
+            type="text"
+            placeholder="Enter Aount name"
+            value={fileName}
+            onChange={(e) => setFileName(e.target.value)}
+          />
+        </div>
+        
+        <button className="leaf-btn" onClick={() => getOrCreateFile()}>
           Create Sheet
         </button>
 
-        <button onClick={downloadPDF}>Download PDF</button>
-        <button onClick={downloadCSV}>Download CSV</button>
+        {/* <button onClick={downloadPDF}>Download PDF</button>
+        <button onClick={downloadCSV}>Download CSV</button> */}
       </div>
     </div>
   );

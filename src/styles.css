@@ -1,11 +1,17 @@
 
 
-
+body,
+input,
+button,
+textarea,
+select {
+    font-family: cursive;
+}
 .container {
   display: flex;
   justify-content: center; /* vertical center */
   align-items: center;     /* horizontal center */
-  padding: 20;
+  padding: 10;
   margin-left: auto;
   margin-right: auto;
 }
@@ -38,18 +44,53 @@
   letter-spacing: 0.5px;
 }
 
+    
+
+     .inputBox{
+        display:flex;
+        border-radius:4px;
+        overflow:hidden;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .inputBox label{
+        background:#22653a;
+        color:white;
+        padding:16px 24px;
+        font-size:18px;
+        display:flex;
+        align-items:center;
+        min-width: 25%;
+    }
+
+    .inputBox input{
+        flex:1;
+        border:none;
+        outline:none;
+        padding:16px 20px;
+        font-size:18px;
+        background:#ddd;
+        color:#1b5e52;
+    } 
+
 .innrDiv
 {
-  width: 45%;
+  width: 100%;
   border: 1px solid #ccc;
   margin: auto;
 }
 
 .innrDivActive {
-   width: 45%;
+   width: 100%;
    border: 3px solid #40924f; /* darker shade */
    background-color: black;
    margin: auto;
+}
+
+.active {
+   border: 3px solid #40924f; /* darker shade */
+   background-color: black;
 }
 
 .fileList {
@@ -156,7 +197,7 @@ h3,h4{
 .list-title {
   text-align: center;
   color: #e74c3c;
-  font-family: "Comic Sans MS", cursive;
+ 
   margin-bottom: 20px;
 }
 

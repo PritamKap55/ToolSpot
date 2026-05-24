@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGoogleLogin } from '@react-oauth/google';
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const TableLayoutEdit = () => {
 
@@ -10,22 +10,21 @@ const TableLayoutEdit = () => {
   const [fildName, setFildName] = useState("");
   const [formData, setFormData] = useState([]);
 
-    useEffect(() => {
+  useEffect(() => {
 
-  if (!access_token) {
-     alert("access_token Error")
-    return;
-  }else{
-    GetValue();
-  }
+    if (!access_token) {
+      alert("access_token Error")
+      return;
+    } else {
+      GetValue();
+    }
 
-}, [access_token]);
+  }, [access_token]);
 
 
   async function GetValue() {
 
-    if (selectedId !="")
-    { 
+    if (selectedId != "") {
 
       const response1 = await fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values:batchGet?ranges=Sheet1!1:1&ranges=Sheet1!${selectedId}:${selectedId}`,
@@ -45,38 +44,37 @@ const TableLayoutEdit = () => {
       } else {
         row = data.valueRanges[1]?.values?.[0] || [];
       }
-       const formatted = headers.map((key, index) => ({
+      const formatted = headers.map((key, index) => ({
         label: key,
         value: row[index] || "",
       }));
 
       setFormData(formatted);
 
-    } 
-        
+    }
+
 
   }
 
   async function Submit() {
 
-    if (selectedId !="1")
-    { 
+    if (selectedId != "1") {
       const updatedRow = formData.map(item => item.value);
       await fetch(
-          `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1!${selectedId}:${selectedId}?valueInputOption=RAW`,
-          {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${access_token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              range: `Sheet1!${selectedId}:${selectedId}`,
-              majorDimension: "ROWS",
-              values: [updatedRow],
-            }),
-          }
-);
+        `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1!${selectedId}:${selectedId}?valueInputOption=RAW`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            range: `Sheet1!${selectedId}:${selectedId}`,
+            majorDimension: "ROWS",
+            values: [updatedRow],
+          }),
+        }
+      );
     } else {
 
       const newRow = formData.map(item => item.value);
@@ -95,43 +93,38 @@ const TableLayoutEdit = () => {
         }
       );
     }
-        
+
 
   }
-  
-   const handleChange = (index, newValue) => {
+
+  const handleChange = (index, newValue) => {
     const updated = [...formData];
     updated[index].value = newValue;
     setFormData(updated);
   };
 
   return (
-    <div>
+    <div className="container">
+      <div className="innrContainer">
       <h3>Edit</h3>
-
-      
-      
-
-
-    <div>
-     
-
-      {formData.map((item, index) => (
-        <div key={index} style={{ marginBottom: "10px" }}>
-          <span style={{ fontWeight: "bold" }}>{item.label}</span>:{" "}
-          <input
-            type="text"
-            value={item.value}
-            onChange={(e) => handleChange(index, e.target.value)}
-          />
+      <div >
+        {formData.map((item, index) => (
+          <div className="inputBox">
+            <label style={{ fontWeight: "bold" }}>{item.label}</label>
+            <input
+              type="text"
+              value={item.value}
+              onChange={(e) => handleChange(index, e.target.value)}
+            />
+          </div>
+        ))}
         </div>
-      ))}
-    </div>
-
-     <button onClick={() => Submit()}>
-        Submit
-       </button>
       
+
+      <button className="leaf-btn" onClick={() => Submit()}>
+        Submit
+      </button>
+</div>
     </div>
   );
 };
