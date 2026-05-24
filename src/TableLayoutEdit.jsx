@@ -106,25 +106,25 @@ const TableLayoutEdit = () => {
   return (
     <div className="container">
       <div className="innrContainer">
-      <h3>Edit</h3>
-      <div >
-        {formData.map((item, index) => (
-          <div className="inputBox">
-            <label style={{ fontWeight: "bold" }}>{item.label}</label>
-            <input
-              type="text"
-              value={item.value}
-              onChange={(e) => handleChange(index, e.target.value)}
-            />
-          </div>
-        ))}
+        <h3>Edit</h3>
+        <div >
+          {formData.map((item, index) => (
+            <div className="inputBox">
+              <label style={{ fontWeight: "bold" }}>{item.label}</label>
+              <input
+                type="text"
+                value={item.value}
+                onChange={(e) => handleChange(index, e.target.value)}
+              />
+            </div>
+          ))}
         </div>
-      
 
-      <button className="leaf-btn" onClick={() => Submit()}>
-        Submit
-      </button>
-</div>
+
+        <button className="leaf-btn" onClick={() => Submit()}>
+          Submit
+        </button>
+      </div>
     </div>
   );
 };

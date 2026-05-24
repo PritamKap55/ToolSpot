@@ -3,13 +3,18 @@ import { useState } from "react";
 import TV from "./TV";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import ListLayout from "./ListLayout";
+// import TableLayout from "./TableLayout";
+// import TreeLayout from "./TreeLayout";
+
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
 function CreateSheet() {
 
   const location = useLocation();
-  const { access_token } = location.state || {};
+  
+  const { access_token  } = location.state || {};
 
   const [layout, setLayout] = useState("");
   const [fileName, setFileName] = useState("");
@@ -128,14 +133,90 @@ function CreateSheet() {
     link.click();
   };
 
-  return (
 
-    <div className="container">
-      <div className="innrContainer">
+  const [index, setIndex] = useState(0);
+  const totalSlides = 4;
+
+  const moveSlide = (direction) => {
+
+    let newIndex = index + direction;
+
+    if (newIndex < 0) {
+      newIndex = totalSlides - 1;
+    }
+
+    if (newIndex >= totalSlides) {
+      newIndex = 0;
+    }
+
+    setIndex(newIndex);
+  };
+
+  const currentSlide = (n) => {
+    setIndex(n);
+  };
+
+
+
+  return (
+    <div className="container1">
+      <div className="headerLayout">
         <h3>Select Option</h3>
         <p> {layout}</p>
+      </div>
+      <div className="bodyLayout">
 
-        <ul className="fileList">
+        <div className="carousel">
+
+          <div
+            className="carousel-track"
+            style={{
+              transform: `translateX(-${index * 100}%)`,
+            }}
+          >
+
+            <div className="slide">
+              <div className="card">
+                <ListLayout layout="List"/>
+              </div>
+            </div>
+
+            <div className="slide">
+              <div className="card">
+                <ListLayout layout="Check List"/>
+              </div>
+            </div>
+
+            <div className="slide">
+              <div className="card">3</div>
+            </div>
+
+            <div className="slide">
+              <div className="card">4</div>
+            </div>
+
+          </div>
+          <button className="arrow prev" onClick={() => moveSlide(-1)}>
+            ❮
+          </button>
+          <button className="arrow next" onClick={() => moveSlide(1)}>
+            ❯
+          </button>
+
+        </div>
+
+        <div className="dots">
+
+          {[0, 1, 2, 3].map((dot) => (
+            <span
+              key={dot}
+              className={`dot ${index === dot ? "active" : ""}`}
+              onClick={() => currentSlide(dot)}
+            ></span>
+          ))}
+
+        </div>
+        {/* <ul>
           <li onClick={() => setLayout(layoutOptions[0])}
             className={layoutOptions[0] === layout ? "innrDivActive" : "innrDiv"}
           >
@@ -214,9 +295,10 @@ function CreateSheet() {
             </table>
 
           </li>
-        </ul>
+        </ul> */}
 
-
+      </div>
+      <div className="footrLayout">
         <div className="inputBox">
           <label>Name</label>
           <input
@@ -226,13 +308,21 @@ function CreateSheet() {
             onChange={(e) => setFileName(e.target.value)}
           />
         </div>
-        
+
         <button className="leaf-btn" onClick={() => getOrCreateFile()}>
           Create Sheet
         </button>
+      </div>
 
-        {/* <button onClick={downloadPDF}>Download PDF</button>
+      <div className="container">
+        <div className="innrContainer">
+
+
+
+
+          {/* <button onClick={downloadPDF}>Download PDF</button>
         <button onClick={downloadCSV}>Download CSV</button> */}
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate, useLocation } from "react-router-dom";
 
-const ListLayout = () => {
+const ListLayout = ({ layout }) => {
   const location = useLocation();
   const { access_token, files } = location.state || {};
   const navigate = useNavigate();
@@ -41,22 +41,29 @@ const ListLayout = () => {
   };
 
   useEffect(() => {
-    getSheetData();
+    if ((layout == "List")||(layout == "Check List")) {
+      let NewAccount = [];
+      while (NewAccount.length < 11) {
+        NewAccount.push("");
+      }
+      setItems(NewAccount);
+    } else {
+      getSheetData();
+    }
   }, []);
 
   return (
     <div className="todo-paper">
-
-      <div className="todo-header">
-        <h2>{files.name}</h2>
-      </div>
-
-
+      {files ?
+        <div className="todo-header">
+          <h2>{files.name}</h2>
+        </div> : ""
+      }
       <div class="todo-body">
         {items.map((item, index) => (
           <div class="todo-line">
 
-            {files.appProperties.layout == "Check List" && (
+            {files? files.appProperties.layout:layout == "Check List" && (
               <input className="check-box" type="checkbox" />
             )}
 

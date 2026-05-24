@@ -52,8 +52,6 @@ function AccountsPage() {
   return (
 
     <div className="container">
-
-
       {!user ? (
         <button onClick={() => navigate("/sheets")}>
           Re Login
@@ -61,9 +59,6 @@ function AccountsPage() {
       ) : (
         <div className="innrContainer">
           <h3>Welcome {user.name}</h3>
-
-
-
           <h4>Account</h4>
           <ul className="fileList">
             {files.map((file, index) => (

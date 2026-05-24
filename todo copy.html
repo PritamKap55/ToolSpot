@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial;
+  padding:20px;
+}
+
+.slider{
+  width:100%;
+  max-width:500px;
+  margin:auto;
+  overflow:hidden;
+  position:relative;
+}
+
+.slides{
+  display:flex;
+  width:400%;
+  transition:0.5s;
+}
+
+.slide{
+  width:100%;
+  flex-shrink:0;
+  padding:10px;
+}
+
+.card{
+  height:200px;
+  background:#ece4b7;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+}
+
+/* Hide radio */
+
+input{
+  display:none;
+}
+
+/* Slide Move */
+
+#slide1:checked ~ .slider .slides{
+  transform:translateX(0%);
+}
+
+#slide2:checked ~ .slider .slides{
+  transform:translateX(-100%);
+}
+
+#slide3:checked ~ .slider .slides{
+  transform:translateX(-200%);
+}
+
+#slide4:checked ~ .slider .slides{
+  transform:translateX(-300%);
+}
+
+/* Dots */
+
+.navigation{
+  text-align:center;
+  margin-top:15px;
+}
+
+.navigation label{
+  width:12px;
+  height:12px;
+  background:#bbb;
+  display:inline-block;
+  border-radius:50%;
+  margin:5px;
+  cursor:pointer;
+}
+
+/* Active Dot */
+
+#slide1:checked ~ .navigation label:nth-child(1),
+#slide2:checked ~ .navigation label:nth-child(2),
+#slide3:checked ~ .navigation label:nth-child(3),
+#slide4:checked ~ .navigation label:nth-child(4){
+  background:#131b48;
+}
+
+/* Arrows */
+
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:#131b48;
+  color:white;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  text-align:center;
+  line-height:40px;
+  font-size:22px;
+  cursor:pointer;
+  z-index:10;
+}
+
+.left{
+  left:10px;
+}
+
+.right{
+  right:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<input type="radio" name="slider" id="slide1" checked>
+<input type="radio" name="slider" id="slide2">
+<input type="radio" name="slider" id="slide3">
+<input type="radio" name="slider" id="slide4">
+
+<div class="slider">
+
+  <div class="slides">
+
+    <div class="slide">
+      <div class="card">1</div>
+    </div>
+
+    <div class="slide">
+      <div class="card">2</div>
+    </div>
+
+    <div class="slide">
+      <div class="card">3</div>
+    </div>
+
+    <div class="slide">
+      <div class="card">4</div>
+    </div>
+
+  </div>
+
+  <!-- Arrows -->
+
+  <label for="slide4" class="arrow left">❮</label>
+  <label for="slide2" class="arrow right">❯</label>
+
+</div>
+
+<div class="navigation">
+  <label for="slide1"></label>
+  <label for="slide2"></label>
+  <label for="slide3"></label>
+  <label for="slide4"></label>
+</div>
+
+</body>
+</html>
