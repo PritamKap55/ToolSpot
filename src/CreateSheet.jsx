@@ -4,8 +4,8 @@ import TV from "./TV";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import ListLayout from "./ListLayout";
-// import TableLayout from "./TableLayout";
-// import TreeLayout from "./TreeLayout";
+import TableLayout from "./TableLayout";
+import TreeLayout from "./TreeLayout";
 
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -188,11 +188,15 @@ function CreateSheet() {
             </div>
 
             <div className="slide">
-              <div className="card">3</div>
+              <div className="card">
+              <TableLayout />
+              </div>
             </div>
 
             <div className="slide">
-              <div className="card">4</div>
+              <div className="card">
+              <TreeLayout/>
+              </div>
             </div>
 
           </div>
