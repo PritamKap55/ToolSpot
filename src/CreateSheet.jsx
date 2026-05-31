@@ -2,7 +2,6 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import TV from "./TV";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import ListLayout from "./ListLayout";
 import TableLayout from "./TableLayout";
 import TreeLayout from "./TreeLayout";
@@ -10,51 +9,12 @@ import TreeLayout from "./TreeLayout";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
-function CreateSheet() {
-
+function CreateSheet({ hue }) {
   const location = useLocation();
-  
-  const { access_token  } = location.state || {};
-
-  const [layout, setLayout] = useState("");
+  const { access_token } = location.state || {};
+  const [layout, setLayout] = useState("List");
   const [fileName, setFileName] = useState("");
-  const layoutOptions = ["List", "Check List", "Tree", "Table"];
-  const items = ["Coffee", "Tea", "Coca Cola"];
-
-  const treeData = [
-    {
-      id: 1,
-      name: "Parent 1",
-      children: [
-        {
-          id: 2,
-          name: "Child 1",
-          children: [
-            { id: 3, name: "Grandchild 1" }
-          ]
-        },
-        {
-          id: 4, name: "Child 2",
-          children: [
-            { id: 3, name: "Grandchild 2" }
-          ]
-        }
-      ]
-    },
-    {
-      id: 5,
-      name: "Parent 2"
-    }
-  ];
-
-  const data = [
-    { id: 1, name: "Pritam", age: 25 },
-    { id: 2, name: "Vshal", age: 28 },
-    { id: 2, name: "Jane", age: 28 }
-  ];
-
-  const columns = Object.keys(data[0]);
-
+  const layoutOptions = ["List", "Check List", "Table", "Tree"];
 
   async function getOrCreateFile() {
     const query = `name='${fileName}' and mimeType='application/vnd.google-apps.spreadsheet' and trashed=false`;
@@ -100,8 +60,6 @@ function CreateSheet() {
 
     const createData = await createRes.json();
     alert("File created:", createData.id);
-
-
   }
 
   const downloadPDF = () => {
@@ -150,21 +108,21 @@ function CreateSheet() {
     }
 
     setIndex(newIndex);
+    setLayout(layoutOptions[newIndex])
   };
 
   const currentSlide = (n) => {
     setIndex(n);
+    setLayout(layoutOptions[n])
   };
 
-
-
   return (
-    <div className="container1">
-      <div className="headerLayout">
+    <div>
+      <div className="headerLayout" style={{ "--hue": hue }}>
         <h3>Select Option</h3>
-        <p> {layout}</p>
+        <h4> {layout}</h4>
       </div>
-      <div className="bodyLayout">
+      <div className="bodyLayout" style={{ "--hue": hue }}>
 
         <div className="carousel">
 
@@ -177,25 +135,25 @@ function CreateSheet() {
 
             <div className="slide">
               <div className="card">
-                <ListLayout layout="List"/>
+                <ListLayout layout="List" />
               </div>
             </div>
 
             <div className="slide">
               <div className="card">
-                <ListLayout layout="Check List"/>
+                <ListLayout layout="Check List" />
               </div>
             </div>
 
             <div className="slide">
               <div className="card">
-              <TableLayout />
+                <TableLayout />
               </div>
             </div>
 
             <div className="slide">
               <div className="card">
-              <TreeLayout/>
+                <TreeLayout />
               </div>
             </div>
 
@@ -220,117 +178,27 @@ function CreateSheet() {
           ))}
 
         </div>
-        {/* <ul>
-          <li onClick={() => setLayout(layoutOptions[0])}
-            className={layoutOptions[0] === layout ? "innrDivActive" : "innrDiv"}
-          >
-
-            {open && (
-
-              <ul>
-                {items.map((item, index) => (
-                  <li
-                    key={index}
-                    style={{
-                      padding: "5px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-          </li>
-          <li className="fileList" onClick={() => setLayout(layoutOptions[1])}
-            className={layoutOptions[1] === layout ? "innrDivActive" : "innrDiv"}
-          >
-
-            {open && (
-
-              <ul>
-                {items.map((item, index) => (
-                  <li
-                    key={index}
-                    style={{
-                      padding: "5px",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <input type="checkbox" disabled />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-          </li>
-
-          <li className="fileList" onClick={() => setLayout(layoutOptions[2])}
-            className={layoutOptions[2] === layout ? "innrDivActive" : "innrDiv"}
-          >
-
-            <TV data={treeData} disabled />
-
-          </li>
-          <li onClick={() => setLayout(layoutOptions[3])}
-            className={layoutOptions[3] === layout ? "innrDivActive" : "innrDiv"}
-          >
-
-            <table border="1">
-              <thead>
-                <tr>
-                  {columns.map((col) => (
-                    <th key={col}>{col.toUpperCase()}</th>
-                  ))}
-                </tr>
-              </thead>
-
-              <tbody>
-                {data.map((row, i) => (
-                  <tr key={i}>
-                    {columns.map((col) => (
-                      <td style={{ padding: "4px" }} key={col}>{row[col]}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-
-          </li>
-        </ul> */}
-
+       
       </div>
-      <div className="footrLayout">
+      <div className="footrLayout" style={{ "--hue": hue }}>
         <div className="inputBox">
           <label>Name</label>
           <input
             type="text"
-            placeholder="Enter Aount name"
+            placeholder="Enter Acount name"
             value={fileName}
             onChange={(e) => setFileName(e.target.value)}
           />
         </div>
-
-        <button className="leaf-btn" onClick={() => getOrCreateFile()}>
-          Create Sheet
-        </button>
-      </div>
-
-      <div className="container">
-        <div className="innrContainer">
-
-
-
-
-          {/* <button onClick={downloadPDF}>Download PDF</button>
-        <button onClick={downloadCSV}>Download CSV</button> */}
+        <div className="inputBox">
+          <button className="leaf-btn" onClick={() => getOrCreateFile()}>
+            Create Sheet
+          </button>
         </div>
       </div>
+      {/* <button onClick={downloadPDF}>Download PDF</button>
+        <button onClick={downloadCSV}>Download CSV</button> */}
     </div>
   );
 }
-
 export default CreateSheet;
-

@@ -6,28 +6,212 @@ select {
   font-family: cursive;
 }
 
+.settings {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  z-index: 1000;
+  text-align: right;
+  width: 100%
+}
+
+
+
 .container1 {
   width: 100%;
   max-width: 500px;
   margin: auto;
+  position: relative;
 }
 
 .headerLayout {
   height: 9vh;
-  background: #61a98a;
+  background: #26362C;
+
 }
 
 .bodyLayout {
   height: 70vh;
   overflow-y: auto;
   scroll-behavior: smooth;
-     background: #c0e8e2;
+  background: #f0f4dd;
 }
 
 .footrLayout {
   height: 20vh;
-   background: #c0e8e2;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(180deg,
+      #e4e6db 0%,
+      #c0cfb2 50%,
+      #8ca98a 100%);
 }
+
+
+
+
+.slidecontainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  background: #d3d3d3;
+  outline: none;
+
+}
+
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 25px;
+
+  background: #000000;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #04AA6D;
+  cursor: pointer;
+}
+
+.rainbow {
+  width: 100%;
+  height: 25px;
+  /* adjust as you need */
+  background: linear-gradient(90deg,
+      red,
+      yellow,
+      lime,
+      cyan,
+      blue,
+      magenta,
+      red);
+}
+
+.slidecontainer input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  border-radius: 0 !important;
+  margin: 0;
+}
+
+
+
+.theme .headerLayout {
+  background-color: hsl(var(--hue), 100%, 27%);
+}
+
+.theme .bodyLayout {
+
+  background-color: hsl(var(--hue), 100%, 95%);
+}
+
+.theme .footrLayout {
+  background: linear-gradient(180deg,
+      hsl(var(--hue), 100%, 90%) 0%,
+      hsl(var(--hue), 100%, 44%) 50%,
+      hsl(var(--hue), 100%, 20%) 100%);
+}
+
+/* ----------yellow------------ */
+
+.yellow .headerLayout {
+  background: #757500;
+}
+
+.yellow .bodyLayout {
+  background: #FFFFE6;
+}
+
+.yellow .footrLayout {
+  background: linear-gradient(180deg,
+      #FFFFB8 0%,
+      #D1D100 50%,
+      #A3A300 100%);
+}
+
+/* ----------blue------------ */
+
+.blue .headerLayout {
+  background: darkblue;
+}
+
+.blue .bodyLayout {
+  background: #E6E6FF;
+}
+
+.blue .footrLayout {
+  background: linear-gradient(180deg,
+      #B8B8FF 0%,
+      #0000D1 50%,
+      #0000A3 100%);
+}
+
+/* ----------green------------ */
+
+.green .headerLayout {
+  background: darkgreen;
+}
+
+.green .bodyLayout {
+  background: #E6FFE6;
+}
+
+.green .footrLayout {
+  background: linear-gradient(180deg,
+      #B8FFB8 0%,
+      #00D100 50%,
+      #006400 100%);
+}
+
+/* -----------orange------------ */
+.orange .headerLayout {
+  background: darkorange;
+}
+
+.orange .bodyLayout {
+  background: #FFF4E6;
+}
+
+.orange .footrLayout {
+  background: linear-gradient(180deg,
+      #FFDFB8 0%,
+      #FFB65C 50%,
+      #FFA12E 100%);
+}
+
+
+/* ----------purple------------ */
+
+.purple .headerLayout {
+  background: purple;
+}
+
+
+.purple .bodyLayout {
+  background: #FFE6FF;
+}
+
+.purple .footrLayout {
+  background: linear-gradient(180deg,
+      #FFB8FF 0%,
+      #D100D1 50%,
+      #A300A3 100%);
+}
+
 
 
 .leaf-btn {
@@ -63,6 +247,8 @@ select {
   padding-bottom: 5px;
   width: 90%;
   margin: auto;
+  justify-content: center; 
+  align-items: center;     
 }
 
 .inputBox label {
@@ -79,7 +265,7 @@ select {
   border: none;
   outline: none;
   padding: 5px 5px;
-  background: #ddd;
+  background: #FFF;
   color: #1b5e52;
 }
 
@@ -97,68 +283,69 @@ select {
   background-color: black;
   margin: auto;
 }
+
 /* ----------------carousel----------------- */
-.carousel{
-  width:100%;
-  max-width:500px;
-  margin:auto;
-  overflow:hidden;
-  position:relative;
+.carousel {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
 }
 
-.carousel-track{
-  display:flex;
-  transition:0.5s;
+.carousel-track {
+  display: flex;
+  transition: 0.5s;
 }
 
-.slide{
-  min-width:100%;
-  
-}
-.card{
-  height:70vh;
-  background:#ece4b7;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.slide {
+  min-width: 100%;
+
 }
 
-.arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:#131b48;
-  color:white;
-  border:none;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  cursor:pointer;
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.prev{
-  left:10px;
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #131b48;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.next{
-  right:10px;
+.prev {
+  left: 10px;
 }
 
-.dots{
-  text-align:center;
-  top:70%;
+.next {
+  right: 10px;
+}
+
+.dots {
+  text-align: center;
+  top: 70%;
   position: absolute;
   width: 100%;
   max-width: 500px;
 }
-.dot{
-  height:12px;
-  width:12px;
-  margin:0 5px;
-  background:#bbb;
-  border-radius:50%;
-  display:inline-block;
-  cursor:pointer;
+
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  background: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
 }
 
 /* ////////////////////////////////////////////////////////// */
@@ -279,11 +466,12 @@ ul {
 h3,
 h4 {
   margin: 5px;
+  color: #FFF;
 }
 
 .list-container {
 
-  height: 100vh;
+  height: 70vh;
 
   background: #fff;
   border: 5px solid #f4b400;
@@ -355,8 +543,7 @@ h4 {
 }
 
 .todo-paper {
-  width: 380px;
-  background: #fff;
+  width: 98%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   padding-bottom: 30px;
   text-align: left;
@@ -405,7 +592,7 @@ h4 {
   outline: none;
   color: #6b6375;
   font-family: 25px;
-  background-color: #fff;
+  background-color: #ffffff00;
 }
 
 .input-box:focus {
@@ -418,7 +605,7 @@ h4 {
 /* table */
 
 .table-body {
-  min-height: 100vh;
+  min-height: 70vh;
   background: linear-gradient(to right, #2cc56f, #35b8d7);
 
   color: white;

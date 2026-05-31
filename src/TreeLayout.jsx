@@ -7,7 +7,31 @@ const TreeLayout = () => {
 const location = useLocation();
 const { access_token, files } = location.state || {};
 const navigate = useNavigate();
-const [treeData, setTreeData] = useState([]);
+const [treeData, setTreeData] = useState([
+    {
+      id: 1,
+      name: "Parent 1",
+      children: [
+        {
+          id: 2,
+          name: "Child 1",
+          children: [
+            { id: 3, name: "Grandchild 1" }
+          ]
+        },
+        {
+          id: 4, name: "Child 2",
+          children: [
+            { id: 3, name: "Grandchild 2" }
+          ]
+        }
+      ]
+    },
+    {
+      id: 5,
+      name: "Parent 2"
+    }
+  ]);
 
 const getSheetData = async () => {
   const res = await fetch(

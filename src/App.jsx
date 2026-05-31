@@ -9,23 +9,68 @@ import Details from "./DetailsPage";
 import ListLayoutEdit from "./ListLayoutEdit";
 import TableLayoutEdit from "./TableLayoutEdit";
 import TreeLayoutEdit from "./TreeLayoutEdit";
+import { useState } from "react";
 
 function App() {
+  const [theme, setTheme] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
+  const [huechecke, setHuechecke] = useState(false);
+  const [hue, setHue] = useState(50);
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/sheets" element={<SheetsPage />} />
-        <Route path="/accounts" element={<Accounts />} />
-        <Route path="/create" element={<CreateSheet />} />
-        <Route path="/sheet/:id" element={<SheetDetail />} />
-        <Route path="/Share/:id" element={<SharedSheet />} />
-        <Route path="/Details" element={<Details />} />
-        <Route path="/ListLayoutEdit" element={<ListLayoutEdit />} />
-        <Route path="/TableLayoutEdit" element={<TableLayoutEdit />} />
-        <Route path="/TreeLayoutEdit" element={<TreeLayoutEdit />} />
-      </Routes>
-    </BrowserRouter>
+    <div className={ huechecke ? "theme":""}>
+      <div className="container1">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LoginPage hue={hue}  />} />
+            <Route path="/sheets" element={<SheetsPage hue={hue}  />} />
+            <Route path="/accounts" element={<Accounts hue={hue} />} />
+            <Route path="/create" element={<CreateSheet hue={hue}  />} />
+            <Route path="/sheet/:id" element={<SheetDetail hue={hue}  />} />
+            <Route path="/Share/:id" element={<SharedSheet hue={hue}  />} />
+            <Route path="/Details" element={<Details hue={hue}  />} />
+            <Route path="/ListLayoutEdit" element={<ListLayoutEdit hue={hue}  />} />
+            <Route path="/TableLayoutEdit" element={<TableLayoutEdit hue={hue}  />} />
+            <Route path="/TreeLayoutEdit" element={<TreeLayoutEdit hue={hue}  />} />
+          </Routes>
+        </BrowserRouter>
+        <div className="settings">
+          <div
+            className="settingBtn"
+            onClick={() => setShowMenu(!showMenu)}
+          >
+            ⚙️
+
+          </div>
+
+          {showMenu && (
+            <div>
+
+
+              <div className="slidecontainer">
+
+                <input
+                  type="range"
+                  min="0"
+                  max="360"
+                  value={hue}
+                  onChange={(e) => setHue(e.target.value)}
+                  className="slider rainbow"
+                  id="myRange"
+                  style={{ margin: "0" }}
+                />
+
+                <input
+                  type="checkbox"
+                  checked={huechecke}
+                  onChange={(e) => setHuechecke(e.target.checked)}
+                />
+              </div>
+             
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

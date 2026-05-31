@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 
 
-function AccountsPage() {
+function AccountsPage({hue}) {
   const [user, setUser] = useState(null);
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -51,42 +51,56 @@ function AccountsPage() {
 
   return (
 
-    <div className="container">
-      {!user ? (
-        <button onClick={() => navigate("/sheets")}>
-          Re Login
-        </button>
-      ) : (
-        <div className="innrContainer">
-          <h3>Welcome {user.name}</h3>
-          <h4>Account</h4>
-          <ul className="fileList">
-            {files.map((file, index) => (
-              <li key={file.id}
-                className={`fileItem ${selectedFile?.id === file.id ? "active" : ""}`}
-                onClick={() => setSelectedFile(file)} >
-                <span className="fileNumber">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="fileName">{file.name}</span>
+    <div>
+      <div className="headerLayout" style={{ "--hue": hue }}>
+        <h3>{!user ? "Welcome" : `Welcome ${user.name}`}</h3>
+        <h4>Account</h4>
+      </div>
+      <div className="bodyLayout" style={{ "--hue": hue }}>
+        
+        {!user ? (
+          <button onClick={() => navigate("/sheets")}>
+            Re Login
+          </button>
+        ) : (
+          <div className="innrContainer">
 
-              </li>
-            ))}
-          </ul>
+            
 
+            <ul className="fileList">
+              {files.map((file, index) => (
+                <li key={file.id}
+                  className={`fileItem ${selectedFile?.id === file.id ? "active" : ""}`}
+                  onClick={() => setSelectedFile(file)} >
+                  <span className="fileNumber">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="fileName">{file.name}</span>
+
+                </li>
+              ))}
+            </ul>
+
+
+          </div>
+        )}
+      </div>
+      <div className="footrLayout" style={{ "--hue": hue }}>
+        <div>
           <button className="leaf-btn" onClick={() => navigate("/Details", { state: { access_token: access_token, files: selectedFile } })}>
             Open
           </button>
           <button className="leaf-btn" onClick={() => navigate("/Share/${selectedId}")}>
             Share
           </button>
-          <div style={{margin:'20px'}}>
-            <button className="leaf-btn" onClick={() => navigate("/create", { state: { access_token: access_token } })}>
-              Create New Account
-            </button>
-          </div>
         </div>
-      )}
+        <div style={{ margin: '20px' }}>
+          <button className="leaf-btn" onClick={() => navigate("/create", { state: { access_token: access_token } })}>
+            Create New Account
+          </button>
+        </div>
+      </div>
+
     </div>
   );
 }

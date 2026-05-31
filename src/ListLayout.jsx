@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate, useLocation } from "react-router-dom";
 
-const ListLayout = ({ layout }) => {
+const ListLayout = ({ hue, layout }) => {
   const location = useLocation();
   const { access_token, files } = location.state || {};
   const navigate = useNavigate();
   const [items, setItems] = useState([]);
+  const [fileName, setFileName] = useState("");
 
   const getSheetData = async () => {
     const res = await fetch(
@@ -41,7 +42,7 @@ const ListLayout = ({ layout }) => {
   };
 
   useEffect(() => {
-    if ((layout == "List")||(layout == "Check List")) {
+    if ((layout == "List") || (layout == "Check List")) {
       let NewAccount = [];
       while (NewAccount.length < 11) {
         NewAccount.push("");
@@ -53,32 +54,53 @@ const ListLayout = ({ layout }) => {
   }, []);
 
   return (
-    <div className="todo-paper">
-      {files ?
-        <div className="todo-header">
-          <h2>{files.name}</h2>
-        </div> : ""
-      }
-      <div class="todo-body">
-        {items.map((item, index) => (
-          <div class="todo-line">
+    <div>
 
-            {files? files.appProperties.layout:layout == "Check List" && (
-              <input className="check-box" type="checkbox" />
-            )}
+      <div className="headerLayout" style={{ "--hue": hue }}>
+        <h3>{!files ? "" : ` ${files.name}`}</h3>
+      </div>
+      
+      <div className="bodyLayout" style={{ "--hue": hue }}>
+        <div className="todo-paper">
+          <div class="todo-body">
+            {items.map((item, index) => (
+              <div class="todo-line">
+                {((files?.appProperties?.layout === "Check List") || layout === "Check List") && (
+                  <input className="check-box" type="checkbox" />
+                )}
 
-            <input className="line-space input-box" type="text" value={item}
-              onChange={(e) => handleChange(index, e.target.value)}
-            />
+                <input className="line-space input-box" type="text" value={item}
+                  onChange={(e) => handleChange(index, e.target.value)}
+                />
 
-            <div>
-              📌
-            </div>
+                <div>
+                  📌
+                </div>
+
+              </div>
+            ))}
 
           </div>
-        ))}
-
-
+        </div>
+      </div>
+      <div className="footrLayout" style={{ "--hue": hue }}>
+        <div className="inputBox">
+          <label>Name</label>
+          <input
+            type="text"
+            placeholder="Enter File name"
+            value={fileName}
+            onChange={(e) => setFileName(e.target.value)}
+          />
+        </div>
+        <div className="inputBox">
+          <button className="leaf-btn" onClick={() => getOrCreateFile()}>
+           Download PDF
+          </button>
+          <button className="leaf-btn" onClick={() => getOrCreateFile()}>
+           Download CSV
+          </button>
+        </div>
       </div>
     </div>
   );
