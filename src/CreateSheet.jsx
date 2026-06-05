@@ -6,8 +6,6 @@ import ListLayout from "./ListLayout";
 import TableLayout from "./TableLayout";
 import TreeLayout from "./TreeLayout";
 
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 
 function CreateSheet({ hue }) {
   const location = useLocation();
@@ -62,34 +60,8 @@ function CreateSheet({ hue }) {
     alert("File created:", createData.id);
   }
 
-  const downloadPDF = () => {
-    const doc = new jsPDF();
+  
 
-    doc.text("Items:", 10, 10);
-
-    items.forEach((item, index) => {
-      doc.text(`• ${item}`, 10, 20 + index * 10);
-    });
-
-    doc.save("list.pdf");
-  };
-
-  const downloadCSV = () => {
-    // Add header
-    const header = ["No,Item"];
-
-    // Convert data
-    const rows = items.map((item, index) => `${index + 1},${item}`);
-
-    const csvContent = [header, ...rows].join("\n");
-
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "items.csv";
-    link.click();
-  };
 
 
   const [index, setIndex] = useState(0);
@@ -119,7 +91,7 @@ function CreateSheet({ hue }) {
   return (
     <div>
       <div className="headerLayout" style={{ "--hue": hue }}>
-        <h3>Select Option</h3>
+
         <h4> {layout}</h4>
       </div>
       <div className="bodyLayout" style={{ "--hue": hue }}>

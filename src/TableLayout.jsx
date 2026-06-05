@@ -48,8 +48,7 @@ const TableLayout = ({ hue }) => {
       </div>
       <div className="bodyLayout" style={{ "--hue": hue }}>
         <div className="table-body">
-          <div className="table-title">FIXED TABLE HEADER</div>
-
+          
           <div className="table-container">
             <table className="list-table" border="1" cellPadding="10">
               <thead>

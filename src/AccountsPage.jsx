@@ -53,7 +53,6 @@ function AccountsPage({hue}) {
 
     <div>
       <div className="headerLayout" style={{ "--hue": hue }}>
-        <h3>{!user ? "Welcome" : `Welcome ${user.name}`}</h3>
         <h4>Account</h4>
       </div>
       <div className="bodyLayout" style={{ "--hue": hue }}>
@@ -87,7 +86,7 @@ function AccountsPage({hue}) {
       </div>
       <div className="footrLayout" style={{ "--hue": hue }}>
         <div>
-          <button className="leaf-btn" onClick={() => navigate("/Details", { state: { access_token: access_token, files: selectedFile } })}>
+          <button className="leaf-btn" onClick={() => navigate("/Details", { state: { access_token: access_token, files: selectedFile,hue:hue } })}>
             Open
           </button>
           <button className="leaf-btn" onClick={() => navigate("/Share/${selectedId}")}>
