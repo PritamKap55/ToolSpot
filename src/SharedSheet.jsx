@@ -1,21 +1,23 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function SharedSheet() {
+  const location = useLocation();
+  const { access_token, files, hue } = location.state || {};
+  console.log(files);
   const { id } = useParams();
   const [email, setEmail] = useState("");
 
-  const shareLogin = useGoogleLogin({
-    scope: "https://www.googleapis.com/auth/drive",
-    onSuccess: async (tokenResponse) => {
+  async function shareLogin() {
 
-      const res = await fetch(
-        `https://www.googleapis.com/drive/v3/files/${id}/permissions`,
+     const res = await fetch(
+        `https://www.googleapis.com/drive/v3/files/${files.id}/permissions`,
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${tokenResponse.access_token}`,
+            Authorization: `Bearer ${access_token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
@@ -28,33 +30,39 @@ function SharedSheet() {
 
       const data = await res.json();
 
-
       if (data.id) {
         alert("Sheet shared successfully ✅");
       } else {
         alert("Error sharing sheet ❌");
       }
-    },
-    onError: () => console.log("Error"),
-  });
+
+  }
+
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Share Sheet</h2>
+    <div>
 
-      <p>Sheet ID: {id}</p>
+      <div className="headerLayout" style={{ "--hue": hue }}>
+        <h4> {files.name}</h4>
+      </div>
+      <div className="bodyLayout" style={{ "--hue": hue }}>
+        
+        <div className="inputBox">
+          <label>Email</label>
+          <input
+            type="text"
+            placeholder="Enter Acount name"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className="footrLayout" style={{ "--hue": hue }}>
+        <button onClick={() => shareLogin()}>
+          Share Sheet
+        </button>
+      </div>
 
-      <input
-        type="email"
-        placeholder="Enter email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <br /><br />
-
-      <button onClick={() => shareLogin()}>
-        Share Sheet
-      </button>
     </div>
   );
 }

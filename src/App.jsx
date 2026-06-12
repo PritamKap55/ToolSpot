@@ -26,7 +26,7 @@ function App() {
             <Route path="/accounts" element={<Accounts hue={hue} />} />
             <Route path="/create" element={<CreateSheet hue={hue}  />} />
             <Route path="/sheet/:id" element={<SheetDetail hue={hue}  />} />
-            <Route path="/Share/:id" element={<SharedSheet hue={hue}  />} />
+            <Route path="/Share" element={<SharedSheet hue={hue}  />} />
             <Route path="/Details" element={<Details hue={hue}  />} />
             <Route path="/ListLayoutEdit" element={<ListLayoutEdit hue={hue}  />} />
             <Route path="/TableLayoutEdit" element={<TableLayoutEdit hue={hue}  />} />

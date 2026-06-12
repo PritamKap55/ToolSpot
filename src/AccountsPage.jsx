@@ -89,7 +89,7 @@ function AccountsPage({hue}) {
           <button className="leaf-btn" onClick={() => navigate("/Details", { state: { access_token: access_token, files: selectedFile,hue:hue } })}>
             Open
           </button>
-          <button className="leaf-btn" onClick={() => navigate("/Share/${selectedId}")}>
+          <button className="leaf-btn" onClick={() => navigate("/Share",{ state: { access_token: access_token, files: selectedFile,hue:hue } })}>
             Share
           </button>
         </div>
