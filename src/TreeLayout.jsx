@@ -100,20 +100,7 @@ const TreeLayout = ({ hue }) => {
       <div className="bodyLayout" style={{ "--hue": hue }}>
         <TreeView data={treeData} />
 
-        <button
-          className="list-add-btn"
-          onClick={() =>
-            navigate("/ListLayoutEdit", {
-              state: {
-                access_token,
-                files,
-                selectedId: "",
-              },
-            })
-          }
-        >
-          + Add Item
-        </button>
+       
       </div>
        <div className="footrLayout" style={{ "--hue": hue }}>
         

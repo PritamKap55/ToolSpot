@@ -9,7 +9,7 @@ const TreeNode = ({ node }) => {
 
   return (
 
-     <li>
+    <li>
       <div className="node-row">
         <span
           className="toggle"
@@ -19,8 +19,13 @@ const TreeNode = ({ node }) => {
         </span>
 
         <div className="node-card">
-      
-          <div>{node.name}</div>
+
+          <div>
+            <span>⬇️</span>
+            {node.name}
+            <span>➡️</span>
+            <span>❌</span>
+          </div>
         </div>
       </div>
 
@@ -32,8 +37,8 @@ const TreeNode = ({ node }) => {
         </ul>
       )}
     </li>
-    
-    
+
+
   );
 };
 
