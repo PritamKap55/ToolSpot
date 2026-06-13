@@ -11,20 +11,16 @@ const TreeNode = ({ node }) => {
 
      <li>
       <div className="node-row">
-        <button
+        <span
           className="toggle"
           onClick={() => setIsOpen(!isOpen)}
         >
           {node.children ? (isOpen ? "−" : "+") : ""}
-        </button>
+        </span>
 
         <div className="node-card">
-          <div className="node-header">
-            <span className="dot"></span>
-            MODEL
-          </div>
-
-          <div className="node-body">{node.name}</div>
+      
+          <div>{node.name}</div>
         </div>
       </div>
 

@@ -8,7 +8,7 @@ import TreeLayout from "./TreeLayout";
 //import "./styles.css";
 
 
-function DetailsPage() {
+function DetailsPage({hue}) {
   const location = useLocation();
   const { access_token, files } = location.state || {};
   const navigate = useNavigate();
@@ -78,13 +78,13 @@ const data = await res.json();
       
       <div style={{ display: files.appProperties.layout.includes("List")? "block" : "none" }}>
      
-          <ListLayout />
+          <ListLayout hue={hue} />
       </div>
       <div style={{ display: files.appProperties.layout=="Tree" ? "block" : "none" }}>
-          <TreeLayout />
+          <TreeLayout  hue={hue}/>
       </div>
       <div style={{ display: files.appProperties.layout=="Table" ? "block" : "none" }}>
-          <TableLayout />
+          <TableLayout hue={hue} />
       </div>
     </div>
   );

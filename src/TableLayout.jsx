@@ -56,6 +56,23 @@ const TableLayout = ({ hue }) => {
                   {items[0]?.map((header, i) => (
                     <th key={i}>{header}</th>
                   ))}
+                  <th>
+                    <span
+                        className="list-update-btn"
+                        onClick={() =>
+                          navigate("/TableLayoutEdit", {
+                            state: {
+                              access_token,
+                              files,
+                              selectedId: 1,
+                            },
+                          })
+                        }
+                      >
+                        ➕✏️
+                      </span>
+                    
+                    </th>
                 </tr>
               </thead>
 
@@ -66,7 +83,7 @@ const TableLayout = ({ hue }) => {
                       <td key={colIndex}>{row[colIndex] || ""}</td>
                     ))}
                     <td>
-                      <button
+                      <span
                         className="list-update-btn"
                         onClick={() =>
                           navigate("/TableLayoutEdit", {
@@ -79,9 +96,9 @@ const TableLayout = ({ hue }) => {
                         }
                       >
                         ✏️
-                      </button>
+                      </span>
 
-                      <button
+                      <span
                         className="list-update-btn"
                         onClick={() =>
                           navigate("/TableLayoutEdit", {
@@ -94,7 +111,7 @@ const TableLayout = ({ hue }) => {
                         }
                       >
                         ❌
-                      </button>
+                      </span>
 
 
                     </td>
@@ -110,12 +127,12 @@ const TableLayout = ({ hue }) => {
                 state: {
                   access_token,
                   files,
-                  selectedId: "1",
+                  selectedId: "0",
                 },
               })
             }
           >
-            + Add Item
+            + Add new Row;
           </button>
         </div>
 

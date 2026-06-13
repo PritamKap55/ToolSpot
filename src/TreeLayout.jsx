@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useGoogleLogin } from '@react-oauth/google';
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import TreeView from "./TreeView";
 
-const TreeLayout = () => {
-const location = useLocation();
-const { access_token, files } = location.state || {};
-const navigate = useNavigate();
-const [treeData, setTreeData] = useState([
+const TreeLayout = ({ hue }) => {
+  const location = useLocation();
+  const { access_token, files } = location.state || {};
+  const navigate = useNavigate();
+  const [treeData, setTreeData] = useState([
     {
       id: 1,
       name: "Parent 1",
@@ -33,86 +33,92 @@ const [treeData, setTreeData] = useState([
     }
   ]);
 
-const getSheetData = async () => {
-  const res = await fetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1!A1:C100`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    }
-  );
+  const getSheetData = async () => {
+    const res = await fetch(
+      `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1!A1:C100`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    );
 
-  const data = await res.json();
+    const data = await res.json();
 
-  const rows = data.values.slice(1);
+    const rows = data.values.slice(1);
 
-  const list = rows.map((r,index) => ({
-  id: Number(r[0]),
-  name: r[1],
-  parent: Number(r[2]),
-  rowNumber: index + 2
-}));
+    const list = rows.map((r, index) => ({
+      id: Number(r[0]),
+      name: r[1],
+      parent: Number(r[2]),
+      rowNumber: index + 2
+    }));
 
-const buildTree = (list) => {
-  const map = {};
-  const roots = [];
+    const buildTree = (list) => {
+      const map = {};
+      const roots = [];
 
-  list.forEach(item => {
-    map[item.id] = { ...item, children: [] };
-  });
+      list.forEach(item => {
+        map[item.id] = { ...item, children: [] };
+      });
 
-   list.forEach(item => {
-    if (item.parent === 0) {
-      roots.push(map[item.id]);
-    } else {
-      map[item.parent]?.children.push(map[item.id]);
-    }
-  });
-   return roots;
-};
+      list.forEach(item => {
+        if (item.parent === 0) {
+          roots.push(map[item.id]);
+        } else {
+          map[item.parent]?.children.push(map[item.id]);
+        }
+      });
+      return roots;
+    };
 
-const treeData = buildTree(list);
+    const treeData = buildTree(list);
 
-const formattedTree = treeData.map(node => ({
-  label: node.name,
-  value: node.id,
-  children: node.children,
-  rowNumber: node.rowNumber,
-}));
+    const formattedTree = treeData.map(node => ({
+      label: node.name,
+      value: node.id,
+      children: node.children,
+      rowNumber: node.rowNumber,
+    }));
 
-setTreeData(formattedTree);
+    setTreeData(formattedTree);
 
-console.log(formattedTree)
+    console.log(formattedTree)
 
-};
+  };
 
-useEffect(() => {
-  getSheetData();
-}, []);
+  useEffect(() => {
+    getSheetData();
+  }, []);
 
   return (
-  <div className="list-container">
-  <h2 className="list-title">Shopping List</h2>
+    <div>
+      <div className="headerLayout" style={{ "--hue": hue }}>
+        <h4> {files.name}</h4>
+      </div>
+      <div className="bodyLayout" style={{ "--hue": hue }}>
+        <TreeView data={treeData} />
 
-  <TreeView  data={treeData} />
- 
-  <button
-    className="list-add-btn"
-    onClick={() =>
-      navigate("/ListLayoutEdit", {
-        state: {
-          access_token,
-          files,
-          selectedId: "",
-        },
-      })
-    }
-  >
-    + Add Item
-  </button>
-</div>
+        <button
+          className="list-add-btn"
+          onClick={() =>
+            navigate("/ListLayoutEdit", {
+              state: {
+                access_token,
+                files,
+                selectedId: "",
+              },
+            })
+          }
+        >
+          + Add Item
+        </button>
+      </div>
+       <div className="footrLayout" style={{ "--hue": hue }}>
+        
+      </div>
+    </div>
   );
 };
 

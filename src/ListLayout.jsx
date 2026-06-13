@@ -223,7 +223,7 @@ const downloadPDF = () => {
                       setOpenNoteIndex(openNoteIndex === index ? null : index)
                     }
                   >
-                    📌
+                    {item.note ===""?"📌":"📋"}
                   </span>
 
                   <span

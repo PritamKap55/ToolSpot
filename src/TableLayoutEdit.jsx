@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate, useLocation } from "react-router-dom";
 
-const TableLayoutEdit = () => {
+const TableLayoutEdit = ({ hue }) => {
 
   const location = useLocation();
   const { access_token, files, selectedId } = location.state || {};
@@ -39,11 +39,9 @@ const TableLayoutEdit = () => {
       console.log("Sheet Data:", data);
       const headers = data.valueRanges[0]?.values?.[0] || [];
       let row = [];
-      if (selectedId == "1") {
-        row = headers.map(() => "");
-      } else {
-        row = data.valueRanges[1]?.values?.[0] || [];
-      }
+
+      row = data.valueRanges[1]?.values?.[0] || [];
+
       const formatted = headers.map((key, index) => ({
         label: key,
         value: row[index] || "",
@@ -58,7 +56,7 @@ const TableLayoutEdit = () => {
 
   async function Submit() {
 
-    if (selectedId != "1") {
+    if (selectedId != "0") {
       const updatedRow = formData.map(item => item.value);
       await fetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${files.id}/values/Sheet1!${selectedId}:${selectedId}?valueInputOption=RAW`,
@@ -103,24 +101,37 @@ const TableLayoutEdit = () => {
     setFormData(updated);
   };
 
+  const AddColoum = () => {
+    setFormData([
+    ...formData,
+    { value: "" }
+  ]);
+  };
+
   return (
-    <div className="container">
-      <div className="innrContainer">
+    <div>
+      <div className="headerLayout" style={{ "--hue": hue }}>
         <h3>Edit</h3>
-        <div >
-          {formData.map((item, index) => (
-            <div className="inputBox">
-              <label style={{ fontWeight: "bold" }}>{item.label}</label>
-              <input
-                type="text"
-                value={item.value}
-                onChange={(e) => handleChange(index, e.target.value)}
-              />
-            </div>
-          ))}
-        </div>
+      </div>
+      <div className="bodyLayout" style={{ "--hue": hue }}>
 
-
+        {formData.map((item, index) => (
+          <div className="inputBox">
+            <label style={{ fontWeight: "bold" }}>{selectedId == "1" ? "Name" : item.label}</label>
+            <input
+              type="text"
+              value={item.value}
+              onChange={(e) => handleChange(index, e.target.value)}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="footrLayout" style={{ "--hue": hue }}>
+        {selectedId == "1" ? (
+          <button className="leaf-btn" onClick={() => AddColoum()}>
+            Add
+          </button>
+        ) : null}
         <button className="leaf-btn" onClick={() => Submit()}>
           Submit
         </button>
